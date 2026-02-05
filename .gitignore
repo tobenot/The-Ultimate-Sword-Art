@@ -7,6 +7,7 @@ Assets/_VRCFury/
 
 # 如果你用了 ClientSim 测试，可能会产生一些日志/缓存
 Assets/ClientSimLogs/
+ClientSimStorage/
 
 # 自己乱放的备份、测试文件（看你项目情况）
 *.backup
