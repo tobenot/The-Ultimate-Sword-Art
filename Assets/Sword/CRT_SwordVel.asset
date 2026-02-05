@@ -6,7 +6,7 @@ CustomRenderTexture:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CRT_SwordPos
+  m_Name: CRT_SwordVel
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -38,7 +38,7 @@ CustomRenderTexture:
   m_Dimension: 2
   m_VolumeDepth: 1
   m_ShadowSamplingMode: 2
-  m_Material: {fileID: 2100000, guid: c5a76eea548783a4d98297f0e4b6e2d2, type: 2}
+  m_Material: {fileID: 2100000, guid: c5b7456749628a44e8b8e9134b2073b2, type: 2}
   m_InitSource: 0
   m_InitMaterial: {fileID: 2100000, guid: c5a76eea548783a4d98297f0e4b6e2d2, type: 2}
   m_InitColor: {r: 0, g: 0, b: 0, a: 0}

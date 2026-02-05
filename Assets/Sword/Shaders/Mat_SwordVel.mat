@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_SwordPos
-  m_Shader: {fileID: 4800000, guid: 837639a4ee37290439ebe72e8579a258, type: 3}
+  m_Name: Mat_SwordVel
+  m_Shader: {fileID: 4800000, guid: fee43ad9aa167fd4688cf233efc769b2, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -23,19 +23,24 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _SelfTexture2D:
+    - _PosTexture:
         m_Texture: {fileID: 8600000, guid: 0e813cf9cbbb5534e87c93cf38789f1e, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _VelTexture:
-        m_Texture: {fileID: 8600000, guid: 5b9edbfcc08a9284db64ed629a21183f, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _MaxHeight: 10
-    - _ResetY: -10
-    - _Speed: 0.5
-    - _Spread: 10
-    m_Colors: []
+    - _ArriveRadius: 25
+    - _AttackChance: 0.2
+    - _AttackDuration: 0.1
+    - _AttackSpeed: 40
+    - _MaxSpeed: 15
+    - _NoiseFreq: 1
+    - _NoiseStrength: 2.5
+    - _OrbitCentripetal: 0.5
+    - _OrbitSpeed: 10
+    - _StopRadius: 2
+    - _TurnSpeed: 10
+    m_Colors:
+    - _OrbitUp: {r: 0, g: 1, b: 0, a: 0}
+    - _TargetPos: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
