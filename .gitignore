@@ -1,3 +1,19 @@
+# VRChat 相关 - Udon 编译产物（经常变很大，而且可以重新生成）
+Assets/SerializedUdonPrograms/
+Assets/SerializedUdonPrograms.meta
+
+# VRCFury 等工具的临时文件（如果用了 VRCFury）
+Assets/_VRCFury/
+
+# 如果你用了 ClientSim 测试，可能会产生一些日志/缓存
+Assets/ClientSimLogs/
+
+# 自己乱放的备份、测试文件（看你项目情况）
+*.backup
+*.old
+backup/
+test/
+
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
