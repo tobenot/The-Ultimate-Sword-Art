@@ -42,5 +42,5 @@ Material:
     - _WanderRadius: 30
     m_Colors:
     - _RotationAxis: {r: 0, g: 1, b: 0, a: 0}
-    - _TargetPos: {r: -1.5389999, g: 4.62, b: 14.732, a: 1}
+    - _TargetPos: {r: 23.101, g: 4.62, b: -0.8899994, a: 1}
   m_BuildTextureStacks: []
