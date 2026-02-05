@@ -306,7 +306,7 @@ Transform:
   m_GameObject: {fileID: 565212243}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.607, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -361,7 +361,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 565212243}
-  m_Mesh: {fileID: 4300000, guid: dd0b87f2e9528a742be77fa3a9190cae, type: 2}
+  m_Mesh: {fileID: 4300000, guid: 4c6b6cf45f4bca14b9b7029eaaf5e72f, type: 2}
 --- !u!114 &565212247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,8 +374,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ea6c2075ba08d469824f5414d8c35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textureWidth: 128
-  textureHeight: 128
+  sourceSwordMesh: {fileID: 4300000, guid: 4a98d313e82f9fa48bb238828dbebc46, type: 2}
+  textureWidth: 32
+  textureHeight: 32
 --- !u!1 &994387482
 GameObject:
   m_ObjectHideFlags: 0

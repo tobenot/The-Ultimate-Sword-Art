@@ -1,68 +1,84 @@
-Shader "Wanjian/Render"
+Shader "Wanjian/Render_SwordModel"
 {
-    Properties
-    {
-        // 我们的“行动指令表”
-        _PosTexture ("Position Texture (CRT)", 2D) = "white" {}
-    }
-    SubShader
-    {
-        // 关闭深度写入和开启混合，可以得到一些漂亮的叠加效果，但现在先保持简单
-        Tags { "RenderType"="Transparent" "Queue"="Transparent" }
-        LOD 100
-        Cull Off // 关闭背面剔除，确保我们能看到每个粒子
-        ZWrite Off // 关闭深度写入
-        Blend One One // 使用叠加混合
+	Properties
+	{
+		_PosTexture ("Position Texture", 2D) = "white" {}
+		_VelTexture ("Velocity Texture", 2D) = "white" {}
+		_MainTex ("Sword Texture", 2D) = "white" {}
+		_Color ("Color Tint", Color) = (1,1,1,1)
+		_Scale ("Sword Scale", Float) = 1.0
+	}
+	SubShader
+	{
+		Tags { "RenderType"="Opaque" }
+		LOD 100
 
-        Pass
-        {
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #pragma target 4.5 // tex2Dlod 需要较高的编译目标
+		Pass
+		{
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+			#pragma target 4.5
 
-            #include "UnityCG.cginc"
+			#include "UnityCG.cginc"
 
-            sampler2D _PosTexture;
+			sampler2D _PosTexture;
+			sampler2D _VelTexture;
+			sampler2D _MainTex;
+			float4 _Color;
+			float _Scale;
 
-            struct appdata
-            {
-                float4 vertex : POSITION;
-                float2 uv : TEXCOORD0; // 接收来自“士兵名册”Mesh的UV，也就是ID
-            };
+			struct appdata
+			{
+				float4 vertex : POSITION;
+				float3 normal : NORMAL;
+				float2 uv : TEXCOORD0;
+				float2 uv1 : TEXCOORD1;
+			};
 
-            struct v2f
-            {
-                float4 vertex : SV_POSITION;
-            };
+			struct v2f
+			{
+				float4 pos : SV_POSITION;
+				float2 uv : TEXCOORD0;
+				float3 normal : TEXCOORD1;
+			};
 
-            v2f vert (appdata v)
-            {
-                v2f o;
+			float3x3 LookRotation(float3 forward)
+			{
+				float3 up = float3(0, 1, 0);
+				if (abs(forward.y) > 0.999) up = float3(1, 0, 0);
+				float3 right = normalize(cross(up, forward));
+				up = cross(forward, right);
+				return float3x3(right, up, forward);
+			}
 
-                // 核心操作：
-                // 1. 使用当前顶点的 UV (ID) 去读取位置纹理 (CRT)
-                // 2. 使用 tex2Dlod 而不是 tex2D，因为它可以在顶点着色器中工作
-                //    lod 的 '0' 表示读取最高精度的 mipmap
-                float4 posData = tex2Dlod(_PosTexture, float4(v.uv, 0, 0));
+			v2f vert (appdata v)
+			{
+				v2f o;
 
-                // 3. 将模型空间的顶点位置移动到从纹理中读取到的位置
-                //    因为我们的蓝图网格顶点位置都是(0,0,0)，所以相当于直接设置位置
-                //    注意：posData 是在 SwordSystem 的局部坐标系下的位置
-                float3 worldPos = posData.xyz;
+				float3 posData = tex2Dlod(_PosTexture, float4(v.uv, 0, 0)).rgb;
+				float3 velData = tex2Dlod(_VelTexture, float4(v.uv, 0, 0)).rgb;
 
-                // 4. 将局部坐标转换为最终的裁剪空间坐标，这样摄像机才能正确渲染它
-                o.vertex = UnityObjectToClipPos(worldPos);
+				float3 forward = normalize(velData + 0.0001);
+				float3x3 rot = LookRotation(forward);
 
-                return o;
-            }
+				float3 localPos = v.vertex.xyz * _Scale;
+				float3 rotatedPos = mul(rot, localPos);
+				float3 worldPos = rotatedPos + posData;
 
-            fixed4 frag (v2f i) : SV_Target
-            {
-                // 先给它一个简单的白色
-                return fixed4(1.0, 1.0, 1.0, 0.5);
-            }
-            ENDCG
-        }
-    }
+				o.pos = UnityObjectToClipPos(float4(worldPos, 1.0));
+				o.uv = v.uv1;
+				o.normal = mul(rot, v.normal);
+				return o;
+			}
+
+			fixed4 frag (v2f i) : SV_Target
+			{
+				fixed4 col = tex2D(_MainTex, i.uv) * _Color;
+				float ndotl = max(0, dot(normalize(i.normal), normalize(float3(1,1,1))));
+				return col * (ndotl * 0.5 + 0.5);
+			}
+			ENDCG
+		}
+	}
 }
