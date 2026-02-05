@@ -29,18 +29,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ArriveRadius: 25
-    - _AttackChance: 0.2
-    - _AttackDuration: 0.1
-    - _AttackSpeed: 40
-    - _MaxSpeed: 15
-    - _NoiseFreq: 1
-    - _NoiseStrength: 2.5
-    - _OrbitCentripetal: 0.5
-    - _OrbitSpeed: 10
-    - _StopRadius: 2
-    - _TurnSpeed: 10
+    - _AttackChance: 0.25
+    - _AttackFreq: 0.6
+    - _AttackSpeedMult: 3
+    - _MaxSpeed: 12
+    - _OrbitRadius: 15
+    - _PostPierceBoost: 1.2
+    - _RepulsionForce: 2
+    - _RepulsionRadius: 5
+    - _Turbulence: 4
+    - _TurnSpeed: 4
+    - _WanderRadius: 30
     m_Colors:
-    - _OrbitUp: {r: 0, g: 1, b: 0, a: 0}
-    - _TargetPos: {r: 0, g: 0, b: 0, a: 0}
+    - _RotationAxis: {r: 0, g: 1, b: 0, a: 0}
+    - _TargetPos: {r: -1.5389999, g: 4.62, b: 14.732, a: 1}
   m_BuildTextureStacks: []
